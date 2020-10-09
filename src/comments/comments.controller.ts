@@ -24,6 +24,4 @@ export class CommentsController {
     return this.commentService.create(comment);
   }
 
-
-
 }

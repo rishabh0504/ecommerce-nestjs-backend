@@ -3,25 +3,12 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CommentEntity } from './comment.entity';
 import { Comment } from './comment.dto';
-
-
 @Injectable()
 export class CommentsService {
-
 
   constructor(
     @InjectRepository(CommentEntity) private commentRepository: Repository<CommentEntity>
   ) { }
-
-
-  /*async create(comments: Comment): Promise<CommentEntity> {
-    try {
-      const createdProvider = await this.commentRepository.save(comments);
-    } catch (err) {
-      throw new InternalServerErrorException();
-    }
-  }*/
-
 
   async findByUserId(user: string): Promise<CommentEntity[]> {
     try {

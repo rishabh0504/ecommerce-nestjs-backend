@@ -1,6 +1,6 @@
 import { UserEntity } from "src/user/user.entity";
 import { AbstractEntity } from "src/util/abstract.entity";
-import { Column, Entity, JoinTable, ManyToMany, ManyToOne } from "typeorm";
+import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne } from "typeorm";
 
 
 @Entity('addresses')
@@ -28,7 +28,7 @@ export class AddressEntity extends AbstractEntity {
   zipcode: string;
 
   @ManyToOne(type => UserEntity, user => user.id)
-  @JoinTable()
-  user: UserEntity;
+  @JoinColumn()
+  user: string;
 
 }
