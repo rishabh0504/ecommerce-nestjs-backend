@@ -15,7 +15,12 @@ export class DBaseConnectionService implements TypeOrmOptionsFactory {
       synchronize: true,
       logging: true,
       dropSchema: false,
-      entities: ["dist/**/*.entity{.ts,.js}"]
+      entities: ["dist/**/*.entity{.ts,.js}"],
+      migrations: ["dist/migrations/*.js"],
+      cli: {
+        entitiesDir: "dist",
+        migrationsDir: "dist/migrations"
+      }
     }
   }
 }

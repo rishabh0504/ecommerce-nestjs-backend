@@ -8,6 +8,7 @@ import { Comment } from './comment.dto';
 @Injectable()
 export class CommentsService {
 
+
   constructor(
     @InjectRepository(CommentEntity) private commentRepository: Repository<CommentEntity>
   ) { }
@@ -21,9 +22,25 @@ export class CommentsService {
     }
   }*/
 
-  async findAll(): Promise<CommentEntity[]> {
+
+  async findByUserId(user: string): Promise<CommentEntity[]> {
     try {
       return await this.commentRepository.find({
+        where: {
+          user
+        },
+        relations: ['user', 'product']
+      });
+    } catch (err) {
+      throw new InternalServerErrorException();
+    }
+  }
+  async findByProductId(product: string): Promise<CommentEntity[]> {
+    try {
+      return await this.commentRepository.find({
+        where: {
+          product
+        },
         relations: ['user', 'product']
       });
     } catch (err) {

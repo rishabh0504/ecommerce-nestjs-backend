@@ -7,6 +7,5 @@ export class BrandEntity extends AbstractEntity {
 
   @Column()
   name: string;
-  
 
 }
