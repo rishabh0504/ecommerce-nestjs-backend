@@ -40,4 +40,7 @@ export class UserEntity extends AbstractEntity {
     return await bcrypt.compare(attempt, this.password);
   }
 
+  getId(): string {
+    return this.id
+  }
 }

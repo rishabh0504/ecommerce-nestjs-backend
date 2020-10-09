@@ -31,4 +31,8 @@ export class AddressEntity extends AbstractEntity {
   @JoinColumn()
   user: string;
 
+  getId(): string {
+    return this.id
+  }
+
 }
