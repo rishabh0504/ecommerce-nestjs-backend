@@ -15,10 +15,10 @@ export class CommentEntity extends AbstractEntity {
 
   @OneToOne(type => ProductEntity)
   @JoinColumn()
-  product: string;
+  product: ProductEntity;
 
   @ManyToOne(type => UserEntity, user => user.id)
   @JoinColumn()
-  user: string;
+  user: UserEntity;
 
 }

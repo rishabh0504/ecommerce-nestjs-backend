@@ -14,7 +14,7 @@ export class AddressService {
   ) { }
 
 
-  async create(address: Address): Promise<AddressEntity> {
+  async create(address: any): Promise<AddressEntity> {
     try {
       const createdAddress = await this.addressRepository.save(address);
       return createdAddress;
@@ -80,5 +80,4 @@ export class AddressService {
       throw new InternalServerErrorException(err);
     }
   }
-
 }

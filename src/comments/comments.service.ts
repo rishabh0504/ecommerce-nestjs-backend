@@ -35,7 +35,7 @@ export class CommentsService {
     }
   }
 
-  async create(comment: Comment): Promise<CommentEntity> {
+  async create(comment: any): Promise<CommentEntity> {
     try {
       const createdComment = await this.commentRepository.save(comment);
       return createdComment;

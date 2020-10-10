@@ -1,8 +1,9 @@
 import { BrandEntity } from "src/brand/brand.entity";
+import { CartEntity } from "src/cart/cart.entity";
 import { CommentEntity } from "src/comments/comment.entity";
 import { ProviderEntity } from "src/provider/provider.entity";
 import { AbstractEntity } from "src/util/abstract.entity";
-import { Column, Entity, JoinColumn, JoinTable, ManyToOne, OneToMany, OneToOne } from "typeorm";
+import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany, OneToOne } from "typeorm";
 
 
 @Entity('products')
@@ -34,6 +35,5 @@ export class ProductEntity extends AbstractEntity {
   @ManyToOne(type => ProviderEntity, provider => provider.id)
   @JoinColumn()
   provider: ProviderEntity;
-
 
 }

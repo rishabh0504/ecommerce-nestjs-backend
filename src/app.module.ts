@@ -16,18 +16,11 @@ import { AddressModule } from './address/address.module';
 import { CommentsModule } from './comments/comments.module';
 import { TransactionModule } from './transaction/transaction.module';
 import { DBaseConnectionService } from './dbconnection.service';
-import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({
       useClass: DBaseConnectionService
-    }),
-    MulterModule.register({
-      dest: 'uploads',
-      limits: {
-        fileSize: 1000000
-      }
     }),
     ProductModule,
     OrderModule,

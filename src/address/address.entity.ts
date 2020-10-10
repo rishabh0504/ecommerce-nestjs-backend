@@ -29,7 +29,7 @@ export class AddressEntity extends AbstractEntity {
 
   @ManyToOne(type => UserEntity, user => user.id)
   @JoinColumn()
-  user: string;
+  user: UserEntity;
 
   getId(): string {
     return this.id
