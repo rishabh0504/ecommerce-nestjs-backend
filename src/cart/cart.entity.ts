@@ -7,7 +7,7 @@ import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany
 @Entity('carts')
 export class CartEntity extends AbstractEntity {
 
-  @OneToMany(type => UserEntity, user => user.id)
+  @OneToOne(type => UserEntity, user => user.id)
   @JoinColumn()
   user: UserEntity;
 

@@ -2,7 +2,7 @@ import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ProductEntity } from 'src/product/product.entity';
 import { In, Repository } from 'typeorm';
-import { Cart, UpdatedCart } from './cart.dto';
+import { AddProductToCartDTO, DeleteProductToCartDTO } from './cart.dto';
 import { CartEntity } from './cart.entity';
 @Injectable()
 export class CartService {
@@ -31,22 +31,26 @@ export class CartService {
     }
   }
 
-  async update(id: string, cart: any): Promise<CartEntity> {
+  async addProductToCart(id: string, product: AddProductToCartDTO): Promise<CartEntity> {
     try {
-      cart.id = id;
-      const cartUpdated = await this.cartRepository.save(cart);
-      return cartUpdated;
+      const productId = product.productId;
+      const existingCart = await this.cartRepository.findOne(id, { relations: ['products'] });
+      const foundProduct = await this.productRepository.findOne(productId);
+      if (foundProduct) {
+        existingCart.products.push(foundProduct);
+        return await this.cartRepository.save(existingCart);
+      } else {
+        throw new InternalServerErrorException('Invalid product id.');
+      }
     } catch (err) {
       throw new InternalServerErrorException();
     }
   }
 
-  async findByCartId(id: string): Promise<CartEntity[]> {
+  async findByCartId(id: string): Promise<CartEntity> {
     try {
-      const findById = await this.cartRepository.find({
-        where: {
-          id
-        }, relations: ['products']
+      const findById = await this.cartRepository.findOne(id, {
+        relations: ['products']
       });
       return findById;
     } catch (err) {
@@ -54,4 +58,14 @@ export class CartService {
     }
   }
 
+  async deleteProductFromCart(id: string, product: DeleteProductToCartDTO): Promise<CartEntity> {
+    try {
+      const productId = product.productId;
+      let existingCart = await this.cartRepository.findOne(id, { relations: ['products'] });
+      existingCart.products = existingCart.products.filter((product) => product.id !== productId);
+      return await this.cartRepository.save(existingCart);
+    } catch (err) {
+      throw new InternalServerErrorException();
+    }
+  }
 }
