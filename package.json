@@ -23,7 +23,7 @@
     "migrate": "./node_modules/.bin/typeorm migration:run"
   },
   "dependencies": {
-    "@nestjs/common": "^7.4.4",
+    "@nestjs/common": "^7.6.5",
     "@nestjs/core": "^7.4.4",
     "@nestjs/jwt": "^7.1.0",
     "@nestjs/passport": "^7.1.0",
