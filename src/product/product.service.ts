@@ -12,19 +12,20 @@ export class ProductService {
 
   async findAll(): Promise<ProductEntity[]> {
     try {
+
       return await this.productRepository.find({
-        relations: ['brand']
+        relations: ['brand', 'provider']
       });;
     } catch (err) {
       throw new InternalServerErrorException();
     }
   }
 
-  async findOne(id: string): Promise<ProductEntity> {
+  async findOne(id: string): Promise<any> {
     try {
       return await this.productRepository.findOne(id, {
-        relations: ['brand']
-      });;
+        relations: ['brand', 'provider'],
+      });
     } catch (err) {
       throw new InternalServerErrorException();
     }
@@ -35,6 +36,7 @@ export class ProductService {
       const productCreated = await this.productRepository.save(product);
       return productCreated;
     } catch (err) {
+      console.log(err);
       throw new InternalServerErrorException();
     }
   }

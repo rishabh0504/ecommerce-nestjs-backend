@@ -5,6 +5,7 @@ import { ProductService } from './product.service';
 import { diskStorage, File } from 'multer';
 import { InternalServerErrorException } from '@nestjs/common';
 import { Product, UpdateProduct } from './product.dto';
+import { ProductEntity } from './product.entity';
 
 const path = require('path');
 
@@ -40,8 +41,8 @@ export class ProductController {
   }
 
   @Get()
-  findAll() {
-    return this.productService.findAll();
+  async findAll(): Promise<ProductEntity[]> {
+    return await this.productService.findAll();
   }
 
   @Post()
